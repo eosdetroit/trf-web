@@ -16,7 +16,7 @@ const counterReducer = (count = 0, action ) => {
             return count;
     }
 }
-const statusReducer = (status = 'starting', action ) => {
+const statusReducer = (status = '', action ) => {
     switch(action.type) {
         case "DO":
             return  'doing something';

@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import './App.css';
 import { accessContext, walletProviders } from './defaultData.js';
+import { Autocomplete} from './autocomplete'
+import { haversine } from './airport_utils.js'
 
 
 
@@ -54,7 +56,7 @@ const Wallets = () => {
     });
 
     const renderWalletProviders = walletProviders.map(
-        ({meta}, idx) => (<p onClick={onWalletProviderClick(idx, accessContext, walletProviders)} key={idx}>{meta.shortName}</p>)
+        ({meta}, idx) => (<div className="button" onClick={onWalletProviderClick(idx, accessContext, walletProviders)} key={idx}>{meta.shortName}</div>)
     )
 
     return <>{renderWalletProviders}</>
@@ -62,10 +64,28 @@ const Wallets = () => {
 
 const Button = ({children}) => (<div className="">{children}</div>)
 const Label = ({children}) => (<div className="label">{children}</div>)
+    const empty = {
+        lat: null,
+        lng: null,
+        name: null
+    }
 const Text = ({value, setState, children}) => {
 	if (setState) {
 		return (
-			<input type="text" style={{fontWeight:'bold'}} value={value} onChange={(e) => {setState(e.target.value)}} placeholder={children}/>)
+            <input type="text" value={value} onChange={(e) => setState(e.target.value)} />
+        )
+	}
+	else {
+		return null
+	}
+}
+const AirportText = ({value, setState, children}) => {
+	if (setState) {
+		return (
+         <Autocomplete
+            setPoint={ (data) => { setState(data)}}
+            clearPoint={ () => setState(empty)}
+          />)
 	}
 	else {
 		return null
@@ -73,14 +93,23 @@ const Text = ({value, setState, children}) => {
 }
 
 const App = ({accessContext, walletProviders}) => {
-	const [departure, setDeparture] = useState(null)
-	const [destination, setDestination] = useState(null)
-	useEffect(() => {
-		console.log('seth useEffect', departure, destination)
-		// find airports
-		
-	}, [departure, destination])
+	const [email, setEmail] = useState("")
+	const [name, setName] = useState("")
+	const [start, setStart] = useState(empty)
+	const [end, setEnd] = useState(empty)
 	const [distance, setDistance] = useState(null)
+	useEffect(() => {
+        if (start.name && end.name) {
+          const distance_result = haversine(start.lat, start.lng, end.lat, end.lng);
+            setDistance(distance_result)
+        }
+        else {
+            setDistance(null)
+        }
+	}, [start, end])
+
+
+
 
 	return (
     <div> 
@@ -91,36 +120,24 @@ const App = ({accessContext, walletProviders}) => {
             </div>
         </div>
     
-        <div style={{margin:'0 auto', maxWidth:1000, display:'flex', flexDirection: 'row', padding:20, alignItems:'center', alignContent:'flex-start'}}>
-			<div style={{flexGrow:1}}> 
-				<div className="App-details">
+        <div style={{ margin:'0 auto', maxWidth:1000, display:'flex', flexDirection: 'row', padding:20, alignItems:'center', alignContent:'flex-start'}}>
+			<div style={{flexGrow:1, paddingRight:10}}> 
 					<Label>Name</Label>
-					<Text>Dylan Tull</Text>
+					<Text value={name} setState={setName}>Dylan Tull</Text>
 					<Label>Email</Label>
-					<Text>Dylan@gmail.com</Text>
-					<hr />
+					<Text value={email} setState={setEmail}>Dylan@gmail.com</Text>
 					<Label>Departure</Label>
-					<Text value={departure} setState={setDeparture}>DTW</Text>
+					<AirportText setState={setStart}>DTW</AirportText>
 					<Label>Destination</Label>
-					<Text value={destination} setState={setDestination}>RIO</Text>
-					<Label>Distance Estimate</Label>
-					<div>{distance}</div>
-					<Button>Link Scatter Or Wallet</Button>
-					<Button>Apply</Button>
-				</div>
-				<Wallets accessContext={accessContext} walletProviders={walletProviders} />
-				<div>
-					Departure: {departure}
-				</div>
-				<div>
-					Destination: {destination}
-				</div>
-				<div>
-					Distance: {distance}
-				</div>
+					<AirportText setState={setEnd}>RIO</AirportText>
+					<Label>Distance</Label>
+					<div className="result">{distance}</div>
+        <br />
+        <br />
+                    <Wallets accessContext={accessContext} walletProviders={walletProviders} />
 				<Status />
 			</div>
-			<div style={{flexGrow:1}}> 
+			<div style={{flexGrow:0}}> 
 				<div><img src="/img/trf_sky.png" /></div>
 			</div>
 		</div>
