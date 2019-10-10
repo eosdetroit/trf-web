@@ -25,7 +25,7 @@ const Wallets = () => {
             dispatch({type:'INIT'})
             console.log('Wallet initialized', wallet)
             let connect_response = await wallet.connect()
-            console.log('Successfully connected!')
+            console.log('Successfully connected!', connect_response)
             dispatch({type:'CONNECTED'})
             const discoveryData = await wallet.discover({ pathIndexList: [ 0,1,2,3 ] })
             let accountInfo = null
@@ -93,17 +93,17 @@ const AirportText = ({value, setState, children}) => {
 }
 
 const App = ({accessContext, walletProviders}) => {
-	const [email, setEmail] = useState("")
-	const [name, setName] = useState("")
 	const [start, setStart] = useState(empty)
 	const [end, setEnd] = useState(empty)
 	const [distance, setDistance] = useState(null)
 	useEffect(() => {
         if (start.name && end.name) {
           const distance_result = haversine(start.lat, start.lng, end.lat, end.lng);
+            console.log('distance_result', distance_result)
             setDistance(distance_result)
         }
         else {
+            console.log('null', start, end )
             setDistance(null)
         }
 	}, [start, end])
@@ -112,20 +112,14 @@ const App = ({accessContext, walletProviders}) => {
 
 
 	return (
-    <div> 
-        <div style={{padding: '8px 20px',  backgroundColor:'#F3F5F9', display:'flex', flexDirection: 'row'}}> 
-            <div style={{flexGrow: 1, justifyContent:'flex-start', letterSpacing: '1px', fontWeight:'', fontSize:23}} >TRAVEL REIMBURSMENT FUND</div>
-            <div style={{ justifyContent:'flex-end', letterSpacing: '1px', fontWeight:'bold', fontSize:23}} >
-                <a style={{textDecoration:'none'}} target="_blank" href="http://eosdetroit.io">EOS DETROIT</a>
-            </div>
+    <div style={{display:'flex'}}> 
+        <div style={{display:'flex', flexDirection: 'column', backgroundColor:'#F3F5F9',}}>
+            <div style={{letterSpacing: '1px', padding:'10px', fontWeight:'bold', fontSize:23}} >TRF</div>
+            <div style={{flexGrow:1, padding: '20px 20px',   display:'flex', flexDirection: 'column', flexGrow: 1,  letterSpacing: '1px', fontSize:23, writingMode: 'sideways-lr',textAlign:'center' }} > TRAVEL REIMBURSMENT FUND</div>
         </div>
     
         <div style={{ margin:'0 auto', maxWidth:1000, display:'flex', flexDirection: 'row', padding:20, alignItems:'center', alignContent:'flex-start'}}>
 			<div style={{flexGrow:1, paddingRight:10}}> 
-					<Label>Name</Label>
-					<Text value={name} setState={setName}>Dylan Tull</Text>
-					<Label>Email</Label>
-					<Text value={email} setState={setEmail}>Dylan@gmail.com</Text>
 					<Label>Departure</Label>
 					<AirportText setState={setStart}>DTW</AirportText>
 					<Label>Destination</Label>
@@ -141,6 +135,11 @@ const App = ({accessContext, walletProviders}) => {
 				<div><img src="/img/trf_sky.png" /></div>
 			</div>
 		</div>
+            <div style={{ writingMode:'vertical-lr', justifyContent:'flex-end', }} >
+                <div style={{ maxHeight:200, borderBottomRightRadius:5, borderBottomLeftRadius: 5, padding: '20px 20px', backgroundColor:'#F3F5F9', letterSpacing: '1px', fontWeight:'bold', fontSize:23}} >
+                    <a style={{textDecoration:'none'}} target="_blank" href="http://eosdetroit.io">EOS DETROIT</a>
+                </div>
+            </div>
     </div>
 	)
 };
