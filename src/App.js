@@ -114,7 +114,7 @@ const App = ({accessContext, walletProviders}) => {
 	return (
     <div> 
         <div style={{padding: '8px 20px',  backgroundColor:'#F3F5F9', display:'flex', flexDirection: 'row'}}> 
-            <div style={{flexGrow: 1, justifyContent:'flex-start', letterSpacing: '1px', fontWeight:'', fontSize:23}} >TRAVEL REIMBERSMENT FUND</div>
+            <div style={{flexGrow: 1, justifyContent:'flex-start', letterSpacing: '1px', fontWeight:'', fontSize:23}} >TRAVEL REIMBURSMENT FUND</div>
             <div style={{ justifyContent:'flex-end', letterSpacing: '1px', fontWeight:'bold', fontSize:23}} >
                 <a style={{textDecoration:'none'}} target="_blank" href="http://eosdetroit.io">EOS DETROIT</a>
             </div>
