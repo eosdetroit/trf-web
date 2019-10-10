@@ -1,11 +1,17 @@
 {
-  "name": "56_trf_react_transit_from_scratch",
+  "name": "trf_web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "eos-transit": "^4.0.1",
+    "eos-transit-scatter-provider": "^4.0.1",
+    "eos-transit-stub-provider": "^0.0.8",
+    "eosjs": "^20.0.0-beta3",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
-    "react-scripts": "3.1.2"
+    "react-redux": "^7.1.1",
+    "react-scripts": "3.1.2",
+    "redux": "^4.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
