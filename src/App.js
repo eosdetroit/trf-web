@@ -22,6 +22,7 @@ const Wallets = () => {
             let connect_response = await wallet.connect()
             console.log('Successfully connected!', connect_response)
             dispatch({type:'switch', payload: 'connected'})
+			console.log('about to discover')
             const discoveryData = await wallet.discover({ pathIndexList: [ 0,1,2,3 ] })
             let accountInfo = null
             if (discoveryData.keyToAccountMap.length > 0) {
@@ -35,8 +36,10 @@ const Wallets = () => {
                 accountInfo = wallet.login(accountName, authorization)
             } 
             else { // discovery not supported (scatter for example)
+			console.log('not supported')
                 dispatch({type:'switch', payload:'logging in'})
                 accountInfo = await wallet.login()
+			console.log('done')
             }
             // logged in
             if (!accountInfo) throw Error("Not logged in")
