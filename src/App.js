@@ -27,7 +27,6 @@ const Wallets = () => {
             let accountInfo = null
             if (discoveryData.keyToAccountMap.length > 0) {
                 dispatch({type:'switch', payload:'discovery_completed'})
-                console.log('Discovery successfully completed!', discoveryData);
                 // @todo(seth): should allow selection
                 const index = 0;
                 const keyObj = discoveryData.keyToAccountMap[index];
@@ -36,15 +35,28 @@ const Wallets = () => {
                 accountInfo = wallet.login(accountName, authorization)
             } 
             else { // discovery not supported (scatter for example)
-			console.log('not supported')
                 dispatch({type:'switch', payload:'logging in'})
                 accountInfo = await wallet.login()
-			console.log('done')
             }
             // logged in
             if (!accountInfo) throw Error("Not logged in")
             console.log('Successfully logged in', accountInfo);
             console.log('wallet', wallet)
+            dispatch({type:'switch', payload:'submitting to blockchain'})
+
+
+            let wallet_result = await wallet.eosApi.transact({
+                actions: [{
+                      account: 'wigglewiggle',
+                      name: 'hi',
+                      authorization: [{
+                                    actor: 'wigglewiggle',
+                                    permission: 'active',
+                                  }],
+                    data: {user:"wigglewiggle"},
+                }],
+            }, {blocksBehind: 3, expireSeconds: 60});
+            console.log('transaction result', wallet_result)
             dispatch({type:'switch', payload:'done'})
         }
         catch(err) {
