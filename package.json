@@ -4,13 +4,15 @@
   "private": true,
   "dependencies": {
     "eos-transit": "^4.0.1",
+    "eos-transit-lynx-provider": "^4.0.1",
     "eos-transit-scatter-provider": "^4.0.1",
     "eos-transit-stub-provider": "^0.0.8",
+    "eos-transit-tokenpocket-provider": "^4.0.1",
     "eosjs": "^20.0.0-beta3",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-redux": "^7.1.1",
-    "react-scripts": "3.1.2",
+    "react-scripts": "^3.2.0",
     "redux": "^4.0.4"
   },
   "scripts": {

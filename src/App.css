@@ -1,4 +1,9 @@
-
+body {
+line-height:1.7em;
+}
+p {
+padding-bottom:15px;
+}
 
 .App-logo {
   height: 40vmin;

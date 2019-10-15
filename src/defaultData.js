@@ -1,5 +1,7 @@
 import { initAccessContext } from 'eos-transit';
 import scatter from 'eos-transit-scatter-provider';
+import tokenpocket from 'eos-transit-tokenpocket-provider';
+import lynxWalletProvider from 'eos-transit-lynx-provider';
 
 export const accessContext = initAccessContext({
 	appName: 'trf-web',
@@ -13,6 +15,9 @@ export const accessContext = initAccessContext({
 	},
 	walletProviders: [
 		scatter(),
+        tokenpocket(),
+        lynxWalletProvider()
+
 	]
 });
 export const walletProviders = accessContext.getWalletProviders();

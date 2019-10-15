@@ -1,28 +1,79 @@
 import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import './App.css';
-import { accessContext, walletProviders } from './defaultData.js';
 
-const Status = () => {
+/* accessContent + walletProviders*/
+import { initAccessContext } from 'eos-transit';
+import scatter from 'eos-transit-scatter-provider';
+import tokenpocket from 'eos-transit-tokenpocket-provider';
+import lynxWalletProvider from 'eos-transit-lynx-provider';
+
+
+const bp_api = {
+    dev: {
+        contract: 'wigglewiggle',
+        host: 'jungle2.cryptolions.io',
+        chainId: 'e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473'
+    },
+    live: {
+        contract: 'travelrefund',
+        host: 'eos.greymass.com',
+        chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
+    }
+}
+const env = 'live'
+
+// see if browser is open
+let clientType = null
+if (window.TPJSBrigeClient) {
+     clientType = 'TokenPocket'
+}
+else if (navigator.userAgent.includes("EOSLynx")){
+     clientType = 'EOS Lynx'
+}
+else if (!!navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)){
+	clientType = "mobile_browser" 
+}
+else {
+	clientType = "desktop_browser" 
+}
+
+
+const accessContext = initAccessContext({
+	appName: 'trf-web',
+	network: {
+		host: bp_api[env].host,
+		port: 443,
+		protocol: 'https',
+		chainId: bp_api[env].chainId,
+	},
+	walletProviders: [
+		scatter(),
+        tokenpocket(),
+        lynxWalletProvider()
+
+	]
+});
+const walletProviders = accessContext.getWalletProviders();
+console.log('walletProviders', walletProviders);
+/* /accessContent + walletProviders*/
+
+
+const App = () => {
     const status = useSelector((state) =>state.status)
     const dispatch = useDispatch()
-    return (<div>{status}</div>)
-}
-const Wallets = () => {
-    const dispatch = useDispatch()
-
-    const onWalletProviderClick = (idx) => (async (el) => {
-        // @todo(seth): just do a dispatch, and move all this logic there
-        dispatch({type:'DO'})
+	const Status = () => {
+		const status = useSelector((state) =>state.status)
+		const dispatch = useDispatch()
+		return (<div>{status}</div>)
+	}
+    const selectWalletProvider =  async (idx) => {
         try { 
             const walletProvider = walletProviders[idx];
             const wallet = accessContext.initWallet(walletProvider);
             dispatch({type:'switch', payload: 'wallet initialized'})
-            console.log('Wallet initialized', wallet)
             let connect_response = await wallet.connect()
-            console.log('Successfully connected!', connect_response)
             dispatch({type:'switch', payload: 'connected'})
-			console.log('about to discover')
             const discoveryData = await wallet.discover({ pathIndexList: [ 0,1,2,3 ] })
             let accountInfo = null
             if (discoveryData.keyToAccountMap.length > 0) {
@@ -40,63 +91,92 @@ const Wallets = () => {
             }
             // logged in
             if (!accountInfo) throw Error("Not logged in")
-            console.log('Successfully logged in', accountInfo);
-            console.log('wallet', wallet)
-            dispatch({type:'switch', payload:'submitting to blockchain'})
+            let username = wallet.auth.accountName
 
-
+            dispatch({type:'switch', payload:'submitting to blockchain.'})
             let wallet_result = await wallet.eosApi.transact({
                 actions: [{
-                      account: 'wigglewiggle',
-                      name: 'hi',
+                      account: bp_api[env].contract ,
+                      name: 'create',
                       authorization: [{
-                                    actor: 'wigglewiggle',
-                                    permission: 'active',
+                                    actor: username,
+                                    permission: "active",/*wallet.auth.permission,*/
                                   }],
-                    data: {user:"wigglewiggle"},
+                      data: {user:username},
                 }],
-            }, {blocksBehind: 3, expireSeconds: 60});
-            console.log('transaction result', wallet_result)
+            }, {
+                    broadcast: true,
+                blocksBehind: 3, expireSeconds: 10});
             dispatch({type:'switch', payload:'done'})
         }
         catch(err) {
-            dispatch({type:'switch', payload:'error'})
+            alert(err)
+                /*
+             if (err instanceof RpcError){
+                 console.log(JSON.stringify(e.json, null, 2));
+             }
+             */
+
+            dispatch({type:'switch', payload:"error"})
             console.log('error', err)
         }
-    });
-
+    };
     const renderWalletProviders = walletProviders.map(
-        ({meta}, idx) => (<div className="button" onClick={onWalletProviderClick(idx, accessContext, walletProviders)} key={idx}>{meta.shortName}</div>)
+        ({meta}, idx) => (<div className="button" onClick={() => { selectWalletProvider(idx )}} key={idx}>{meta.name}</div>)
     )
+	const onClickApply = () => {
+		// flip through all the different providers
+		for (var idx = 0; idx < walletProviders.length; ++idx) {
+			if (walletProviders[idx].id == clientType) {
+				selectWalletProvider(idx)
+				return 
+			}
+		}
+		dispatch({type:'switch', payload: 'login_selection'}) 
+	} 
 
-    return <>{renderWalletProviders}</>
-}
-
-
-const App = ({accessContext, walletProviders}) => {
-    const status = useSelector((state) =>state.status)
-    const dispatch = useDispatch()
     let renderLoginBox = null
+	let introText = null
     if (status == 'intro') {
+
+		if (clientType == "mobile_browser") {
+			introText = (
+				<>
+					<p>Login with TokenPocket or with EOS Lynx</p>
+				</>)
+
+		} else if (clientType == "desktop_browser") {
+			introText = (
+				<>
+					<p>Login with <a href="scatter://open">Scatter</a>, <a href="tokenpocket://open">Token Pocket</a>.</p>
+				</>)
+		}
+		else {
+			introText = (
+				<>
+					<p>I see you're logged in with {clientType}. Great!</p>
+				</>)
+		}
+		
         renderLoginBox = (
-			<div style={{minWidth:500, flexGrow:1, paddingRight:10}}> 
+			<div style={{maxWidth:500, flexGrow:1, paddingRight:10}}> 
                 <div>
-                <p>this is the greatest thing in the world</p>
+					{introText}
                 </div>
-                <div>
-                    <div className="button" onClick={() => { dispatch({type:'switch', payload: 'login_selection'}) }} >Login with EOS</div>
+                <div style={{paddingTop:20}}>
+                    <div className="button" onClick={onClickApply}>Login with EOS</div>
                 </div>
 			</div>
         )
     } else if (status == 'login_selection'){
         renderLoginBox = (
-			<div style={{minWidth:500, flexGrow:1, paddingRight:10}}> 
-                <Wallets accessContext={accessContext} walletProviders={walletProviders} />
+			<div style={{maxWidth:500, flexGrow:1, paddingRight:10}}> 
+				<>{renderWalletProviders}</>
 			</div>
         )
     } else if (status == 'done') {
         renderLoginBox = (
-			<div style={{minWidth:500, flexGrow:1, paddingRight:10}}> 
+			<div style={{maxWidth:500, flexGrow:1, paddingRight:10}}> 
                 <div>
                   Success! Now find this rob guy, and hand him your travel info.  
                 </div>
@@ -107,7 +187,7 @@ const App = ({accessContext, walletProviders}) => {
         )
     } else if (status == 'already_signed_up') {
         renderLoginBox = (
-			<div style={{minWidth:500, flexGrow:1, paddingRight:10}}> 
+			<div style={{maxWidth:500, flexGrow:1, paddingRight:10}}> 
                 <div>
                   You're already signed up. Now you just need to find this rob guy, and hand him your travel info.  
                 </div>
@@ -116,9 +196,20 @@ const App = ({accessContext, walletProviders}) => {
                 </div>
 			</div>
         )
+    } else if (status == 'error') {
+        renderLoginBox = (
+			<div style={{maxWidth:500, flexGrow:1, paddingRight:10}}> 
+				<Status /><p>Hmmm.. Make sure your EOS Wallet app is open!</p>
+			
+                    <div className="button" onClick={() => { 
+						dispatch({type:'switch', payload: 'intro'})
+					}}>Try Again</div>
+			</div>
+        )
+
     } else {
         renderLoginBox = (
-			<div style={{minWidth:500, flexGrow:1, paddingRight:10}}> 
+			<div style={{maxWidth:500, flexGrow:1, paddingRight:10}}> 
 				<Status />
 			</div>
         )
