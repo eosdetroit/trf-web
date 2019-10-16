@@ -65,7 +65,7 @@ const App = () => {
 	const Status = () => {
 		const status = useSelector((state) =>state.status)
 		const dispatch = useDispatch()
-		return (<div>{status}</div>)
+		return (<div style={{textAlign:'center', padding:20, }}>{status}</div>)
 	}
     const selectWalletProvider =  async (idx) => {
         try { 
@@ -122,7 +122,7 @@ const App = () => {
         }
     };
     const renderWalletProviders = walletProviders.map(
-        ({meta}, idx) => (<div className="button" onClick={() => { selectWalletProvider(idx )}} key={idx}>{meta.name}</div>)
+        ({meta}, idx) => (<button className="button" onClick={() => { selectWalletProvider(idx )}} key={idx}>{meta.name}</button>)
     )
 	const onClickApply = () => {
 		// flip through all the different providers
@@ -142,13 +142,13 @@ const App = () => {
 		if (clientType == "mobile_browser") {
 			introText = (
 				<>
-					<p>Login with TokenPocket or with EOS Lynx</p>
+					<p>Start by opening the TokenPocket or EOS Lynx, and open this app.</p>
 				</>)
 
 		} else if (clientType == "desktop_browser") {
 			introText = (
 				<>
-					<p>Login with <a href="scatter://open">Scatter</a>, <a href="tokenpocket://open">Token Pocket</a>.</p>
+					<p>Start by opening the <a href="scatter://open">Scatter</a> or <a href="tokenpocket://open">Token Pocket</a> and open this app.</p>
 				</>)
 		}
 		else {
@@ -159,14 +159,26 @@ const App = () => {
 		}
 		
         renderLoginBox = (
-			<div style={{maxWidth:500, flexGrow:1, paddingRight:10}}> 
+			<>
                 <div>
+					<h1>What is the Travel Reimbursement Fund?</h1>
+
+					<p>The TRF is an initiative to make our EOS community conferences more inclusive.</p>
+
+					<p>Through Providing a small travel stipend to anyone who needs it, we can provide better accesibility to the things that matter.</p>
+
+					<p>If you need support please apply.</p>
+
+					<h2>Applying</h2>
+
+					<p>Just login with your EOS username, then bring your travel info (an email orhome address) and come see us at the event</p>
+
 					{introText}
                 </div>
                 <div style={{paddingTop:20}}>
-                    <div className="button" onClick={onClickApply}>Login with EOS</div>
+                    <button className="button" onClick={onClickApply}>LOGIN WITH EOS</button>
                 </div>
-			</div>
+			</>
         )
     } else if (status == 'login_selection'){
         renderLoginBox = (
@@ -201,9 +213,9 @@ const App = () => {
 			<div style={{maxWidth:500, flexGrow:1, paddingRight:10}}> 
 				<Status /><p>Hmmm.. Make sure your EOS Wallet app is open!</p>
 			
-                    <div className="button" onClick={() => { 
+                    <button className="button" onClick={() => { 
 						dispatch({type:'switch', payload: 'intro'})
-					}}>Try Again</div>
+					}}>Try Again</button>
 			</div>
         )
 
@@ -217,18 +229,28 @@ const App = () => {
 	return (
     <div style={{display:'flex', flexDirection: 'column'}}> 
         <div style={{display:'flex', flexDirection: 'row', backgroundColor:'#F3F5F9',}}>
-            <div style={{flexGrow:1, padding: '20px 20px',   display:'flex', flexDirection: 'column', flexGrow: 1,  letterSpacing: '1px', fontSize:23, }} > TRAVEL REIMBURSMENT FUND</div>
-            <div style={{ maxHeight:200, borderBottomRightRadius:5, borderBottomLeftRadius: 5, padding: '20px 20px', backgroundColor:'#F3F5F9', letterSpacing: '1px', fontWeight:'bold', fontSize:23}} >
+            <div style={{flexGrow:1, padding: '20px 20px',   display:'flex', flexDirection: 'column', flexGrow: 1,  letterSpacing: '1px', fontSize:19, }} > TRAVEL REIMBURSMENT FUND</div>
+            <div style={{ maxHeight:200, borderBottomRightRadius:5, borderBottomLeftRadius: 5, padding: '20px 20px', backgroundColor:'#F3F5F9', letterSpacing: '1px', fontWeight:'bold', fontSize:19}} >
                 <a style={{textDecoration:'none'}} target="_blank" href="http://eosdetroit.io">EOS DETROIT</a>
             </div>
         </div>
     
-        <div style={{ margin:'0 auto', maxWidth:1000, display:'flex', flexDirection: 'row', padding:20, alignItems:'flex-start', alignContent:'flex-start'}}>
-            {renderLoginBox}
-			<div style={{flexGrow:0}}> 
-				<div><img src="/img/trf_sky.png" /></div>
+        <div className="main">
+			<div className="left">
+				<div style={{padding:40}}>
+					{renderLoginBox}
+				</div>
+			</div>
+			<div className="right"> 
+				<div><img src="/img/rio_sky.jpg" /></div>
 			</div>
 		</div>
+		<div style={{bottom:0, position:'fixed', right: 0, padding:20}}>
+			<a href="https://eosdetroit.io" target="_blank">
+				<img width={40} src="/img/eos_detroit_logo_transparent.png" />
+			</a>
+		</div>
+
     </div>
 	)
 };

@@ -1,8 +1,109 @@
+html {-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; -webkit-tap-highlight-color: transparent;     }
 body {
-line-height:1.7em;
+margin: 0;
+line-height: 1;
+font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+ul,ol {
+margin-top: 0;
+margin-bottom: 0;
+padding-left: 15px;
+}
+h1,h2,h3,h4,h5,h6 {
+margin-top: 0;
+margin-bottom: 0;
+font-size: inherit;
 }
 p {
+margin-top: 0;
+margin-bottom: 0;
+}
+img {
+border: 0;
+max-width: 100%;
+height: auto;
+vertical-align: middle;
+}
+a {
+color: inherit;
+}
+::-moz-focus-inner {
+border: 0;
+padding: 0;
+}
+button {border: 0; margin: 0; padding: 0; text-align: inherit; text-transform: inherit; font: inherit; -webkit-font-smoothing: inherit; letter-spacing: inherit; background: none;       cursor: pointer; overflow: visible; }
+
+
+
+@font-face {
+  font-family: "Mont-ExtraLight";
+  src: url("fonts/Mont-ExtraLight.eot"); /* IE9 Compat Modes */
+  src: url("fonts/Mont-ExtraLight.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("fonts/Mont-ExtraLight.otf") format("opentype"), /* Open Type Font */
+    url("fonts/Mont-ExtraLight.svg") format("svg"), /* Legacy iOS */
+    url("fonts/Mont-ExtraLight.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("fonts/Mont-ExtraLight.woff") format("woff"), /* Modern Browsers */
+    url("fonts/Mont-ExtraLight.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Mont-Heavy";
+  src: url("fonts/Mont-Heavy.eot"); /* IE9 Compat Modes */
+  src: url("fonts/Mont-Heavy.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("fonts/Mont-Heavy.otf") format("opentype"), /* Open Type Font */
+    url("fonts/Mont-Heavy.svg") format("svg"), /* Legacy iOS */
+    url("fonts/Mont-Heavy.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("fonts/Mont-Heavy.woff") format("woff"), /* Modern Browsers */
+    url("fonts/Mont-Heavy.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Mont-SemiBold";
+  src: url("fonts/MONT-SemiBold.eot"); /* IE9 Compat Modes */
+  src: url("fonts/MONT-SemiBold.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("fonts/MONT-SemiBold.otf") format("opentype"), /* Open Type Font */
+    url("fonts/MONT-SemiBold.svg") format("svg"), /* Legacy iOS */
+    url("fonts/MONT-SemiBold.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("fonts/MONT-SemiBold.woff") format("woff"), /* Modern Browsers */
+    url("fonts/MONT-SemiBold.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+
+.light {
+	font-family: 'Mont-ExtraLight';
+}
+.sample {
+	font-family: 'Mont-SemiBold';
+	font-size: 24px;
+	border: 1px solid #ddd;
+	display: inline-block;
+	padding: 10px;
+}
+
+
+body {
+    font-family: 'Mont-SemiBold';
+    line-height:1.7em;
+	font-size:18px;
+}
+
+h1 {
+font-size:27px;
+line-height:1.2em;
+padding-bottom:20px;
+}
+h2 {
+font-size:26px;
+line-height:1.2em;
 padding-bottom:15px;
+padding-top:30px;
+}
+
+p {
+    padding-bottom:15px;
 }
 
 .App-logo {
@@ -26,7 +127,7 @@ font-weight:bold;
 font-size:30px;
 }
 hr {
-margin:20px 0;
+margin:20px 0 40px;
 height:1px;
 border:none;
 background:#ccc;
@@ -46,13 +147,40 @@ input[type=text] {
 }
 
 .button {
+	margin-top:20px;
+	letter-spacing:1px;
     display:block;
+	width:100%;
     padding:20px 7px;
     border:1px solid #ccc;
-    border-radius:3px;
+    border-radius:13px;
+	text-transform:uppercase;
     font-size:20px;
     text-align:center;
     margin-bottom:10px;
+	transition: all .2s;
+}
+.button:hover {
+	background:#000;
+	color:#ffffff;
+}
+.main {
+	margin:0 auto; 
+	display:flex; 
+	flex-direction: row; 
+	align-items:flex-start; 
+	align-content:flex-start;
+}
+
+@media(min-width:800px) {
+	.main {
+		width:1200px;
+	}
+	.left {
+		flex:1;
+	}
+	.right {
+	}
 }
 
 /* airport calculator */
