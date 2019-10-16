@@ -170,7 +170,7 @@ const App = () => {
 
 					<p>The Travel Reimbursement Fund is an initiative to make our EOS community conferences more inclusive, rolled out for the 2019 EOS Community Conference in Rio.</p>
 
-					<p>Through Providing a small travel stipend to anyone who needs it, we can provide better accesibility to the things that matter.</p>
+					<p>Through providing a small travel stipend to anyone who needs it, we can provide better accesibility to the things that matter.</p>
 
 					<p>If you need support please apply.</p>
 
