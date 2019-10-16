@@ -1,12 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import './App.css';
+import Admin from './Admin';
 
 /* accessContent + walletProviders*/
 import { initAccessContext } from 'eos-transit';
 import scatter from 'eos-transit-scatter-provider';
 import tokenpocket from 'eos-transit-tokenpocket-provider';
 import lynxWalletProvider from 'eos-transit-lynx-provider';
+
+let isAdmin = false;
+if(window.location.hash == "#admin") {
+    isAdmin = true;
+}
 
 
 const bp_api = {
@@ -249,7 +255,7 @@ const App = () => {
         <div id="main-js" className="main">
 			<div className="left">
 				<div style={{padding:40}}>
-					{renderLoginBox}
+					{isAdmin ? Admin : renderLoginBox}
 				</div>
 			</div>
 			<div className="right"> 
