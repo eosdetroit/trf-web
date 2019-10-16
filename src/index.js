@@ -10,6 +10,8 @@ import * as serviceWorker from './serviceWorker';
 const statusReducer = (status = 'intro', action ) => {
     switch(action.type) {
         case "switch":
+            document.getElementById('main-js').scrollIntoView({behavior: 'smooth'});
+
             return  action.payload;
         default: 
             return status;

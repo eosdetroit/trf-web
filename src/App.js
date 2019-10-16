@@ -71,13 +71,13 @@ const App = () => {
         try { 
             const walletProvider = walletProviders[idx];
             const wallet = accessContext.initWallet(walletProvider);
-            dispatch({type:'switch', payload: 'wallet initialized'})
+            dispatch({type:'switch', payload: 'Wallet initialized...'})
             let connect_response = await wallet.connect()
-            dispatch({type:'switch', payload: 'connected'})
+            dispatch({type:'switch', payload: 'Connected...'})
             const discoveryData = await wallet.discover({ pathIndexList: [ 0,1,2,3 ] })
             let accountInfo = null
             if (discoveryData.keyToAccountMap.length > 0) {
-                dispatch({type:'switch', payload:'discovery_completed'})
+                dispatch({type:'switch', payload:'Discovery complete...'})
                 // @todo(seth): should allow selection
                 const index = 0;
                 const keyObj = discoveryData.keyToAccountMap[index];
@@ -86,14 +86,14 @@ const App = () => {
                 accountInfo = wallet.login(accountName, authorization)
             } 
             else { // discovery not supported (scatter for example)
-                dispatch({type:'switch', payload:'logging in'})
+                dispatch({type:'switch', payload:'Logging in...'})
                 accountInfo = await wallet.login()
             }
             // logged in
             if (!accountInfo) throw Error("Not logged in")
             let username = wallet.auth.accountName
 
-            dispatch({type:'switch', payload:'submitting to blockchain.'})
+            dispatch({type:'switch', payload:'Submitting to blockchain...'})
             let wallet_result = await wallet.eosApi.transact({
                 actions: [{
                       account: bp_api[env].contract ,
@@ -138,7 +138,6 @@ const App = () => {
     let renderLoginBox = null
 	let introText = null
     if (status == 'intro') {
-
 		if (clientType == "mobile_browser") {
 			introText = (
 				<>
@@ -161,6 +160,9 @@ const App = () => {
         renderLoginBox = (
 			<>
                 <div>
+                    <div className="hideOnDesktop" style={{paddingBottom:40}}>
+                        <img src="/img/rio_mobile.jpg" />
+                    </div>
 					<h1>What is the Travel Reimbursement Fund?</h1>
 
 					<p>The Travel Reimbursement Fund is an initiative to make our EOS community conferences more inclusive.</p>
@@ -192,7 +194,7 @@ const App = () => {
                 <div>
                   Success! Now find this rob guy, and hand him your travel info.  
                 </div>
-                <div>
+                <div style={{textAlign:'center'}}>
                 <img src="/img/rob.jpg" />
                 </div>
 			</div>
@@ -211,7 +213,8 @@ const App = () => {
     } else if (status == 'error') {
         renderLoginBox = (
 			<div style={{maxWidth:500, flexGrow:1, paddingRight:10}}> 
-				<Status /><p>Hmmm.. Make sure your EOS Wallet app is open!</p>
+            <h1>Something Went Awry</h1>
+				<p>Hmmm.. Make sure your EOS wallet app is open?</p>
 			
                     <button className="button" onClick={() => { 
 						dispatch({type:'switch', payload: 'intro'})
@@ -228,14 +231,22 @@ const App = () => {
     }
 	return (
     <div style={{display:'flex', flexDirection: 'column'}}> 
-        <div style={{display:'flex', flexDirection: 'row', backgroundColor:'#F3F5F9',}}>
+        <div className="nav-desktop">
             <div style={{flexGrow:1, padding: '20px 20px',   display:'flex', flexDirection: 'column', flexGrow: 1,  letterSpacing: '1px', fontSize:19, }} > TRAVEL REIMBURSMENT FUND</div>
             <div style={{ maxHeight:200, borderBottomRightRadius:5, borderBottomLeftRadius: 5, padding: '20px 20px', backgroundColor:'#F3F5F9', letterSpacing: '1px', fontWeight:'bold', fontSize:19}} >
                 <a style={{textDecoration:'none'}} target="_blank" href="http://eosdetroit.io">EOS DETROIT</a>
             </div>
         </div>
+        <div className="nav-mobile" style={{textAlign:'center'}}>
+            <div style={{fontSize:26, padding:20, backgroundColor:'#bfc3c9'}}>
+                EOS DETROIT
+            </div>
+            <div style={{padding:20, backgroundColor:'#f3f5f9'}}>
+                TRAVEL REIMBURSMENT FUND
+            </div>
+        </div>
     
-        <div className="main">
+        <div id="main-js" className="main">
 			<div className="left">
 				<div style={{padding:40}}>
 					{renderLoginBox}

@@ -155,7 +155,7 @@ input[type=text] {
     border:1px solid #ccc;
     border-radius:13px;
 	text-transform:uppercase;
-    font-size:20px;
+    font-size:18px;
     text-align:center;
     margin-bottom:10px;
 	transition: all .2s;
@@ -166,21 +166,38 @@ input[type=text] {
 }
 .main {
 	margin:0 auto; 
-	display:flex; 
-	flex-direction: row; 
-	align-items:flex-start; 
-	align-content:flex-start;
 }
 
+.right {
+    display:none;
+}
+.nav-desktop {
+    display:none;
+}
 @media(min-width:800px) {
+    .nav-mobile {
+        display:none;
+    }
+    .nav-desktop {
+        display:flex; 
+        flex-direction:row;
+        background-color:#F3F5F9;
+    }
 	.main {
 		width:1200px;
 	}
 	.left {
 		flex:1;
+        display:flex; 
+        flex-direction: row; 
+        align-items:flex-start; 
+        align-content:flex-start;
 	}
 	.right {
 	}
+    .hideOnDesktop {
+        display:none;
+    }
 }
 
 /* airport calculator */
