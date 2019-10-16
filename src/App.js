@@ -83,6 +83,7 @@ const App = () => {
                 // @todo(seth): should allow selection
                 const index = 0;
                 const keyObj = discoveryData.keyToAccountMap[index];
+                console.log('discovery, keyObj', keyObj)
                 const accountName = keyObj.accounts[0].account;
                 const authorization = keyObj.accounts[0].authorization;
                 accountInfo = wallet.login(accountName, authorization)
@@ -109,7 +110,7 @@ const App = () => {
                 }],
             }, {
                     broadcast: true,
-                blocksBehind: 3, expireSeconds: 10});
+                blocksBehind: 3, expireSeconds: 100});
             dispatch({type:'switch', payload:'done'})
         }
         catch(err) {
