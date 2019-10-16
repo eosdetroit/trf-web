@@ -145,13 +145,13 @@ const App = () => {
 		if (clientType == "mobile_browser") {
 			introText = (
 				<>
-					<p style={{fontWeight:'bold'}}>Start by opening TokenPocket or EOS Lynx, and then open this app by navigating to https://trf.eosdetroit.io.</p>
+					<p style={{fontWeight:'bold'}}>Start by opening TokenPocket or EOS Lynx, and then open this app by navigating to http://trf.eosdetroit.io.</p>
 				</>)
 
 		} else if (clientType == "desktop_browser") {
 			introText = (
 				<>
-					<p style={{fontWeight:'bold'}}>Start by opening the <a href="scatter://open">Scatter</a> or <a href="tokenpocket://open">Token Pocket</a> and open this app.</p>
+					<p style={{fontWeight:'bold'}}>Start by opening the <a href="scatter://open">Scatter</a> or <a href="tokenpocket://open">Token Pocket</a> and then open this app.</p>
 				</>)
 		}
 		else {
@@ -164,7 +164,7 @@ const App = () => {
         renderLoginBox = (
 			<>
                 <div>
-                    <div className="hideOnDesktop" style={{paddingBottom:40}}>
+                    <div className="hideOnDesktop" style={{textAlign:'center',paddingBottom:40}}>
                         <img src="/img/rio_mobile.jpg" />
                     </div>
 					<h1>What is the Travel Reimbursement Fund?</h1>
@@ -174,10 +174,12 @@ const App = () => {
 					<p>By providing a pro-rata travel stipend to attendees, together we can subsidize the costs of travel for our EOSIO community.</p>
 
 					<p>All attendees are welcome to opt-in! A warm thanks goes out to the generous donors who made this possible:</p>
-                    <li><a target="_blank" href="https://eosrio.io">EOS Rio</a></li>
-                    <li><a target="_blank" href="https://eoslaomao.com">EOS LaoMao</a></li>
-                    <li><a target="_blank" href="">EOS BP Legal Fund Contributors</a></li>
-                    <li><a target="_blank" href="https://eosdetroit.io">EOS Detroit</a></li>
+                    <div className="donors" style={{}}>
+                        <a className="donors--a" target="_blank" href="https://eosrio.io">EOS Rio</a>
+                        <a className="donors--a" target="_blank" href="https://eoslaomao.com">EOS LaoMao</a>
+                        <a className="donors--a" target="_blank" href="">EOS BP Legal Fund Donors</a>
+                        <a className="donors--a" target="_blank" href="https://eosdetroit.io">EOS Detroit</a>
+                    </div>
 					<h2>Applying</h2>
 
 					<p>Just login with your EOS username, then bring your travel info (a flight email or home address) and show it to Robrigo at the event.</p>
@@ -241,10 +243,10 @@ const App = () => {
         isAdmin = true;
     }
 	return (
-    <div style={{display:'flex', paddingBottom:40, flexDirection: 'column'}}> 
+    <div style={{display:'flex', flexDirection: 'column'}}> 
         <div className="nav-desktop">
-            <div style={{flexGrow:1, padding: '20px 20px',   display:'flex', flexDirection: 'column', flexGrow: 1,  letterSpacing: '1px', fontSize:19, }} > TRAVEL REIMBURSMENT FUND</div>
-            <div style={{ maxHeight:200, borderBottomRightRadius:5, borderBottomLeftRadius: 5, padding: '20px 20px', backgroundColor:'#F3F5F9', letterSpacing: '1px', fontWeight:'bold', fontSize:19}} >
+            <div style={{flexGrow:1, padding: '13px 25px',   display:'flex', flexDirection: 'column', flexGrow: 1,  letterSpacing: '1px', fontSize:19, }} > TRAVEL REIMBURSMENT FUND</div>
+            <div style={{ maxHeight:200, borderBottomRightRadius:5, borderBottomLeftRadius: 5, padding: '13px 25px', backgroundColor:'#F3F5F9', letterSpacing: '1px', fontWeight:'bold', fontSize:19}} >
                 <a style={{textDecoration:'none'}} target="_blank" href="http://eosdetroit.io">EOS DETROIT</a>
             </div>
         </div>
@@ -258,29 +260,35 @@ const App = () => {
         </div>
     
         <div id="main-js" className="main">
-			<div className="left" style={{padding:20}}>
+			<div className="left" style={{minHeight:'80vh', padding:'20px 20px 0'}}>
 					{isAdmin ? <Admin /> : renderLoginBox}
-                    <br/>
-                    <div>Sign up for the mailing list below to receive more information about future EOS Community Conferences.</div>
-                    <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css"/>
-    <div id="mc_embed_signup">
-    <form action="https://eosdetroit.us18.list-manage.com/subscribe/post?u=fc364bf57aca4a23d8d5bffb0&amp;id=3bdceba087" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-        <div id="mc_embed_signup_scroll">
-        <label for="mce-EMAIL">Subscribe</label>
-        <input type="email" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required />
-        <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true"><input type="text" name="b_fc364bf57aca4a23d8d5bffb0_3bdceba087" tabindex="-1" value=""/></div>
-        <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button" /></div>
-        </div>
-    </form>
-    </div>
 			</div>
 			<div className="right"> 
 				<div><img src="/img/rio_sky.jpg" /></div>
 			</div>
 		</div>
+            <div style={{marginTop:40, paddingTop:20, paddingLeft:10, paddingRight:10, paddingBottom:60, backgroundColor:'#f3f5f9',fontSize:14, display: 'flex', justifyContent: 'center'}}>
+                        <div style={{maxWidth:503, textAlign:'center'}} >
+                        <br />
+
+
+                        <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css"/>
+
+                        <div>Subscribe and be notified of furture EOS Community Conferences.</div>
+                        <div id="mc_embed_signup">
+                        <form action="https://eosdetroit.us18.list-manage.com/subscribe/post?u=fc364bf57aca4a23d8d5bffb0&amp;id=3bdceba087" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="_blank" novalidate>
+                            <div id="mc_embed_signup_scroll">
+                                <input type="email" name="EMAIL" className="email" id="mce-EMAIL" placeholder="email address" required />
+                            <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true"><input type="text" name="b_fc364bf57aca4a23d8d5bffb0_3bdceba087" tabindex="-1" value=""/></div>
+                            <div className="clear mailchimp-subscribe-eos"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" className="button" /></div>
+                        </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
 		<div style={{bottom:0, position:'fixed', right: 0, padding:20}}>
-			<a href="https://eosdetroit.io" target="_blank">
-				<img width={40} src="/img/eos_detroit_logo_transparent.png" />
+			<a href="http://eosdetroit.io" target="_blank">
+				<img width={65} src="/img/eos_detroit_logo_transparent.png" />
 			</a>
 		</div>
 
