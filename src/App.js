@@ -270,13 +270,16 @@ const App = () => {
             <div style={{marginTop:40, paddingTop:20, paddingLeft:10, paddingRight:10, paddingBottom:60, backgroundColor:'#f3f5f9',fontSize:14, display: 'flex', justifyContent: 'center'}}>
                         <div style={{maxWidth:503, textAlign:'center'}} >
                         <br />
-                        <div>Subscribe and be notified of furture EOS Community Conferences.</div>
+
+
                         <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css"/>
+
+                        <div>Subscribe and be notified of furture EOS Community Conferences.</div>
                         <div id="mc_embed_signup">
                         <form action="https://eosdetroit.us18.list-manage.com/subscribe/post?u=fc364bf57aca4a23d8d5bffb0&amp;id=3bdceba087" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="_blank" novalidate>
-                            <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true"><input type="text" name="b_fc364bf57aca4a23d8d5bffb0_3bdceba087" tabindex="-1" value=""/></div>
                             <div id="mc_embed_signup_scroll">
                                 <input type="email" name="EMAIL" className="email" id="mce-EMAIL" placeholder="email address" required />
+                            <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true"><input type="text" name="b_fc364bf57aca4a23d8d5bffb0_3bdceba087" tabindex="-1" value=""/></div>
                             <div className="clear mailchimp-subscribe-eos"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" className="button" /></div>
                         </div>
                         </form>
