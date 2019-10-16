@@ -164,7 +164,7 @@ const App = () => {
         renderLoginBox = (
 			<>
                 <div>
-                    <div className="hideOnDesktop" style={{paddingBottom:40}}>
+                    <div className="hideOnDesktop" style={{textAlign:'center',paddingBottom:40}}>
                         <img src="/img/rio_mobile.jpg" />
                     </div>
 					<h1>What is the Travel Reimbursement Fund?</h1>
@@ -174,11 +174,11 @@ const App = () => {
 					<p>By providing a pro-rata travel stipend to attendees, together we can subsidize the costs of travel for our EOSIO community.</p>
 
 					<p>All attendees are welcome to opt-in! A warm thanks goes out to the generous donors who made this possible:</p>
-                    <div style={{display: 'flex',justifyContent: 'space-between', }}>
-                        <a className="sponsor" target="_blank" href="https://eosrio.io">EOS Rio</a>
-                        <a className="sponsor" target="_blank" href="https://eoslaomao.com">EOS LaoMao</a>
-                        <a className="sponsor" target="_blank" href="">EOS BP Legal Fund Contributors</a>
-                        <a className="sponsor" target="_blank" href="https://eosdetroit.io">EOS Detroit</a>
+                    <div className="donors" style={{}}>
+                        <a className="donors--a" target="_blank" href="https://eosrio.io">EOS Rio</a>
+                        <a className="donors--a" target="_blank" href="https://eoslaomao.com">EOS LaoMao</a>
+                        <a className="donors--a" target="_blank" href="">EOS BP Legal Fund Donors</a>
+                        <a className="donors--a" target="_blank" href="https://eosdetroit.io">EOS Detroit</a>
                     </div>
 					<h2>Applying</h2>
 
@@ -260,7 +260,7 @@ const App = () => {
         </div>
     
         <div id="main-js" className="main">
-			<div className="left" style={{paddingTop:20, paddingHorizontal:20}}>
+			<div className="left" style={{minHeight:'80vh', padding:'20px 20px 0'}}>
 					{isAdmin ? <Admin /> : renderLoginBox}
 			</div>
 			<div className="right"> 
