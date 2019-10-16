@@ -147,13 +147,13 @@ const App = () => {
 		if (clientType == "mobile_browser") {
 			introText = (
 				<>
-					<p>Start by opening the TokenPocket or EOS Lynx, and open this app.</p>
+					<p style={{fontWeight:'bold'}}>Start by opening TokenPocket or EOS Lynx, and then open this app.</p>
 				</>)
 
 		} else if (clientType == "desktop_browser") {
 			introText = (
 				<>
-					<p>Start by opening the <a href="scatter://open">Scatter</a> or <a href="tokenpocket://open">Token Pocket</a> and open this app.</p>
+					<p style={{fontWeight:'bold'}}>Start by opening the <a href="scatter://open">Scatter</a> or <a href="tokenpocket://open">Token Pocket</a> and open this app.</p>
 				</>)
 		}
 		else {
@@ -190,53 +190,52 @@ const App = () => {
         )
     } else if (status == 'login_selection'){
         renderLoginBox = (
-			<div style={{maxWidth:500, flexGrow:1, paddingRight:10}}> 
-				<>{renderWalletProviders}</>
-			</div>
+            <>{renderWalletProviders}</>
         )
     } else if (status == 'done') {
         renderLoginBox = (
-			<div style={{maxWidth:500, flexGrow:1, paddingRight:10}}> 
+                <>
                 <div>
-                  Success! Now find this rob guy, and hand him your travel info.  
+                  <p>Success! Now find this Rob guy, and show him your travel info. </p>
+                  <p>(A flight email, or something that has your home town on it.)</p>
                 </div>
                 <div style={{textAlign:'center'}}>
                 <img src="/img/rob.jpg" />
                 </div>
-			</div>
+                </>
         )
     } else if (status == 'already_signed_up') {
         renderLoginBox = (
-			<div style={{maxWidth:500, flexGrow:1, paddingRight:10}}> 
+                <>
                 <div>
                   You're already signed up. Now you just need to find this rob guy, and hand him your travel info.  
                 </div>
                 <div>
                 <img src="/img/rob.jpg" />
                 </div>
-			</div>
+                </>
         )
     } else if (status == 'error') {
         renderLoginBox = (
-			<div style={{maxWidth:500, flexGrow:1, paddingRight:10}}> 
+                <>
             <h1>Something Went Awry</h1>
 				<p>Hmmm.. Make sure your EOS wallet app is open?</p>
 			
                     <button className="button" onClick={() => { 
 						dispatch({type:'switch', payload: 'intro'})
 					}}>Try Again</button>
-			</div>
+                </>
         )
 
     } else {
         renderLoginBox = (
-			<div style={{maxWidth:500, flexGrow:1, paddingRight:10}}> 
+                <>
 				<Status />
-			</div>
+            </>
         )
     }
 	return (
-    <div style={{display:'flex', flexDirection: 'column'}}> 
+    <div style={{display:'flex', paddingBottom:40, flexDirection: 'column'}}> 
         <div className="nav-desktop">
             <div style={{flexGrow:1, padding: '20px 20px',   display:'flex', flexDirection: 'column', flexGrow: 1,  letterSpacing: '1px', fontSize:19, }} > TRAVEL REIMBURSMENT FUND</div>
             <div style={{ maxHeight:200, borderBottomRightRadius:5, borderBottomLeftRadius: 5, padding: '20px 20px', backgroundColor:'#F3F5F9', letterSpacing: '1px', fontWeight:'bold', fontSize:19}} >
@@ -253,10 +252,9 @@ const App = () => {
         </div>
     
         <div id="main-js" className="main">
-			<div className="left">
-				<div style={{padding:40}}>
+			<div className="left" style={{padding:40}}>
 					{isAdmin ? Admin : renderLoginBox}
-				</div>
+                {renderLoginBox}
 			</div>
 			<div className="right"> 
 				<div><img src="/img/rio_sky.jpg" /></div>

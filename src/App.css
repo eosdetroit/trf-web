@@ -167,7 +167,6 @@ input[type=text] {
 .main {
 	margin:0 auto; 
 }
-
 .right {
     display:none;
 }
@@ -184,16 +183,14 @@ input[type=text] {
         background-color:#F3F5F9;
     }
 	.main {
+        display:flex;
 		width:1200px;
 	}
 	.left {
 		flex:1;
-        display:flex; 
-        flex-direction: row; 
-        align-items:flex-start; 
-        align-content:flex-start;
 	}
 	.right {
+        display:block;
 	}
     .hideOnDesktop {
         display:none;
