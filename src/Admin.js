@@ -105,7 +105,7 @@ const Admin = () => {
 					}],
 				}, {
 						broadcast: true,
-					blocksBehind: 3, expireSeconds: 10});
+					blocksBehind: 3, expireSeconds: 100});
 				window.alert('Done!')
 				// @todo make this a clear function
 					setUser(null);
