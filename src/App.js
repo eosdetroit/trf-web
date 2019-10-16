@@ -9,10 +9,6 @@ import scatter from 'eos-transit-scatter-provider';
 import tokenpocket from 'eos-transit-tokenpocket-provider';
 import lynxWalletProvider from 'eos-transit-lynx-provider';
 
-let isAdmin = false;
-if(window.location.hash == "#admin") {
-    isAdmin = true;
-}
 
 
 const bp_api = {
@@ -234,6 +230,11 @@ const App = () => {
             </>
         )
     }
+
+    let isAdmin = false;
+    if(window.location.hash == "#admin") {
+        isAdmin = true;
+    }
 	return (
     <div style={{display:'flex', paddingBottom:40, flexDirection: 'column'}}> 
         <div className="nav-desktop">
@@ -253,8 +254,7 @@ const App = () => {
     
         <div id="main-js" className="main">
 			<div className="left" style={{padding:40}}>
-					{isAdmin ? Admin : renderLoginBox}
-                {renderLoginBox}
+					{isAdmin ? <Admin /> : renderLoginBox}
 			</div>
 			<div className="right"> 
 				<div><img src="/img/rio_sky.jpg" /></div>
