@@ -145,7 +145,7 @@ const App = () => {
 		if (clientType == "mobile_browser") {
 			introText = (
 				<>
-					<p style={{fontWeight:'bold'}}>Start by opening TokenPocket or EOS Lynx, and then open this app.</p>
+					<p style={{fontWeight:'bold'}}>Start by opening TokenPocket or EOS Lynx, and then open this app by navigating to https://trf.eosdetroit.io.</p>
 				</>)
 
 		} else if (clientType == "desktop_browser") {
@@ -169,15 +169,18 @@ const App = () => {
                     </div>
 					<h1>What is the Travel Reimbursement Fund?</h1>
 
-					<p>The Travel Reimbursement Fund is an initiative to make our EOS community conferences more inclusive, rolled out for the 2019 EOS Community Conference in Rio.</p>
+					<p>The Travel Reimbursement Fund is an initiative to make EOSIO community events inclusive, rolled out for the 2019 EOS Community Conference in Rio de Janeiro.</p>
 
-					<p>Through providing a small travel stipend to anyone who needs it, we can provide better accesibility to the things that matter.</p>
+					<p>By providing a pro-rata travel stipend to attendees, together we can subsidize the costs of travel for our EOSIO community.</p>
 
-					<p>If you need support please apply.</p>
-
+					<p>All attendees are welcome to opt-in! A warm thanks goes out to the generous donors who made this possible:</p>
+                    <li><a target="_blank" href="https://eosrio.io">EOS Rio</a></li>
+                    <li><a target="_blank" href="https://eoslaomao.com">EOS LaoMao</a></li>
+                    <li><a target="_blank" href="">EOS BP Legal Fund Contributors</a></li>
+                    <li><a target="_blank" href="https://eosdetroit.io">EOS Detroit</a></li>
 					<h2>Applying</h2>
 
-					<p>Just login with your EOS username, then bring your travel info (an email orhome address) and come see us at the event</p>
+					<p>Just login with your EOS username, then bring your travel info (a flight email or home address) and show it to Robrigo at the event.</p>
 
 					{introText}
                 </div>
@@ -206,7 +209,7 @@ const App = () => {
         renderLoginBox = (
                 <>
                 <div>
-                  You're already signed up. Now you just need to find this rob guy, and hand him your travel info.  
+                  You're already signed up. Now you just need to find this Robrigo guy, and hand him your travel info.  
                 </div>
                 <div>
                 <img src="/img/rob.jpg" />
@@ -257,6 +260,19 @@ const App = () => {
         <div id="main-js" className="main">
 			<div className="left" style={{padding:20}}>
 					{isAdmin ? <Admin /> : renderLoginBox}
+                    <br/>
+                    <div>Sign up for the mailing list below to receive more information about future EOS Community Conferences.</div>
+                    <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css"/>
+    <div id="mc_embed_signup">
+    <form action="https://eosdetroit.us18.list-manage.com/subscribe/post?u=fc364bf57aca4a23d8d5bffb0&amp;id=3bdceba087" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <div id="mc_embed_signup_scroll">
+        <label for="mce-EMAIL">Subscribe</label>
+        <input type="email" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required />
+        <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true"><input type="text" name="b_fc364bf57aca4a23d8d5bffb0_3bdceba087" tabindex="-1" value=""/></div>
+        <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button" /></div>
+        </div>
+    </form>
+    </div>
 			</div>
 			<div className="right"> 
 				<div><img src="/img/rio_sky.jpg" /></div>

@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.c1621144.chunk.css",
-    "main.js": "/static/js/main.217c2f1b.chunk.js",
-    "main.js.map": "/static/js/main.217c2f1b.chunk.js.map",
+    "main.js": "/static/js/main.1a287f5d.chunk.js",
+    "main.js.map": "/static/js/main.1a287f5d.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.7d5f0272.js",
     "runtime-main.js.map": "/static/js/runtime-main.7d5f0272.js.map",
     "static/js/2.19d83d22.chunk.js": "/static/js/2.19d83d22.chunk.js",
     "static/js/2.19d83d22.chunk.js.map": "/static/js/2.19d83d22.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.31fa69724551a47499fd54cfc1aa81ca.js": "/precache-manifest.31fa69724551a47499fd54cfc1aa81ca.js",
+    "precache-manifest.e2ad9ccc5e3a9dbc255d7a3e15ce8831.js": "/precache-manifest.e2ad9ccc5e3a9dbc255d7a3e15ce8831.js",
     "service-worker.js": "/service-worker.js",
     "static/css/main.c1621144.chunk.css.map": "/static/css/main.c1621144.chunk.css.map",
     "static/media/App.css": "/static/media/Mont-Heavy.d541aad3.woff"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.7d5f0272.js",
     "static/js/2.19d83d22.chunk.js",
     "static/css/main.c1621144.chunk.css",
-    "static/js/main.217c2f1b.chunk.js"
+    "static/js/main.1a287f5d.chunk.js"
   ]
 }
