@@ -222,6 +222,9 @@ const Admin = () => {
     return (
         <>
         <div>
+            <div className="hideOnDesktop" style={{paddingBottom:40}}>
+                <img src="/img/rio_mobile.jpg" />
+            </div>
             <div>{error}</div>
             <div style={{paddingBottom:40}}>
 				{user ? <div style={{display:'flex'}}><div style={{flex:1}}>{user}</div> <div><button className="small-button" onClick={()=>{
