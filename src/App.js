@@ -163,7 +163,7 @@ const App = () => {
                 <div>
 					<h1>What is the Travel Reimbursement Fund?</h1>
 
-					<p>The TRF is an initiative to make our EOS community conferences more inclusive.</p>
+					<p>The Travel Reimbursement Fund is an initiative to make our EOS community conferences more inclusive.</p>
 
 					<p>Through Providing a small travel stipend to anyone who needs it, we can provide better accesibility to the things that matter.</p>
 
