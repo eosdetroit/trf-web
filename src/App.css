@@ -145,6 +145,15 @@ input[type=text] {
     border:1px dashed #ccc;
     height:40px;
 }
+.small-button {
+	margin:0px;
+	letter-spacing:1px;
+    display:block;
+	width:100%;
+    padding:3px 0px;
+    font-size:12px;
+	transition: all .2s;
+}
 
 .button {
 	margin-top:20px;

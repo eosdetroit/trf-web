@@ -95,6 +95,7 @@ const App = () => {
             if (!accountInfo) throw Error("Not logged in")
             let username = wallet.auth.accountName
 
+            console.log(wallet.eosApi);
             dispatch({type:'switch', payload:'Submitting to blockchain...'})
             let wallet_result = await wallet.eosApi.transact({
                 actions: [{
@@ -167,7 +168,7 @@ const App = () => {
                     </div>
 					<h1>What is the Travel Reimbursement Fund?</h1>
 
-					<p>The Travel Reimbursement Fund is an initiative to make our EOS community conferences more inclusive.</p>
+					<p>The Travel Reimbursement Fund is an initiative to make our EOS community conferences more inclusive, rolled out for the 2019 EOS Community Conference in Rio.</p>
 
 					<p>Through Providing a small travel stipend to anyone who needs it, we can provide better accesibility to the things that matter.</p>
 
@@ -253,7 +254,7 @@ const App = () => {
         </div>
     
         <div id="main-js" className="main">
-			<div className="left" style={{padding:40}}>
+			<div className="left" style={{padding:20}}>
 					{isAdmin ? <Admin /> : renderLoginBox}
 			</div>
 			<div className="right"> 
