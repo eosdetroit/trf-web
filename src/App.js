@@ -11,6 +11,10 @@ import lynxWalletProvider from 'eos-transit-lynx-provider';
 
 
 
+
+
+// get rid of transit.
+
 const bp_api = {
     dev: {
         contract: 'wigglewiggle',
