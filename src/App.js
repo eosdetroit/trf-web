@@ -29,7 +29,7 @@ else if (navigator.userAgent.includes("EOSLynx")){
 let walletButtons = null
 if (deviceType == "mobile" && walletType == null) {
     walletButtons = 
-        <a className="button" href='tpdapp://open?params={"url": "http://trfdev.sethdetroit.com", "chain": "EOS", "source":"trf"}'>LOGIN WITH TOKENPOCKET</a>
+        <a className="button" href='tpdapp://open?params={"url": "http://trf.eosdetroit.io", "chain": "EOS", "source":"trf"}'>LOGIN WITH TOKENPOCKET</a>
 } else if (deviceType == "computer" && walletType == null) {
     walletButtons = <Apply walletType="scatter" walletName="SCATTER" />
 } else if (deviceType == "mobile" && walletType == 'tp') {
@@ -37,22 +37,6 @@ if (deviceType == "mobile" && walletType == null) {
 } else if (deviceType == "mobile" && walletType == 'lynx') {
     walletButtons = <Apply walletType="lynx" walletName="LYNX" />
 }
-/*
-if (window.TPJSBrigeClient) {
-     walletType = 'TokenPocket'
-}
-*/
-
-    /*
-     *
-     * For debugging
-document.write(
-    "<div>userAgent: " +window.navigator.userAgent+"</div>"+
-    "<div>deviceType: " + deviceType + "</div>" + 
-    "<div>deviceCompany: " + deviceCompany+ "</div>" + 
-    "<div>walletType: " + walletType + "</div>" + 
-    '<div><a href=\'tpdapp://open?params={"url": "http://trfdev.sethdetroit.com", "chain": "EOS", "source":"xxx"}\'>Open url with TokenPocket</a></div>')
-    */
 
 
 
