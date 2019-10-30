@@ -29,7 +29,7 @@ else if (navigator.userAgent.includes("EOSLynx")){
 let walletButtons = null
 if (deviceType == "mobile" && walletType == null) {
     walletButtons = 
-        <a className="button" href='tpdapp://open?params={"url": "http://trfdev.sethdetroit.com", "chain": "EOS", "source":"xxx"}'>LOGIN WITH TOKENPOCKET</a>
+        <a className="button" href='tpdapp://open?params={"url": "http://trfdev.sethdetroit.com", "chain": "EOS", "source":"trf"}'>LOGIN WITH TOKENPOCKET</a>
 } else if (deviceType == "computer" && walletType == null) {
     walletButtons = <Apply walletType="scatter" walletName="SCATTER" />
 } else if (deviceType == "mobile" && walletType == 'tp') {
@@ -123,12 +123,13 @@ const App = () => {
                     </>
                 )
             } else if (status == 'error') {
+
+                //<p>Error Code: {error.code}</p>
                 return (
                     <>
                         <h1>Something Went Awry</h1>
+                        <p>Failed while {error.stage}</p>
                         <p>{error.message}</p>
-                        <p>Error Code: {error.code}</p>
-                        <p>Failed During: {error.stage}</p>
 
                     <div style={{paddingTop:20}}>
                         <p>Try again?</p>

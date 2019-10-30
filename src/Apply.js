@@ -71,45 +71,44 @@ const Apply = (props) => {
         try {
             connect_response = await wallet.connect()
         } catch(err) {
-            return recordError(err, 'discovery');
+            return recordError(err, 'discovering');
         }
         dispatch({type:'switch', payload: 'Connected...'})
-        let discoveryData = null
+        let discoveringData = null
         try {
-            discoveryData = await wallet.discover({ pathIndexList: [ 0,1,2,3 ] })
+            discoveringData = await wallet.discover({ pathIndexList: [ 0,1,2,3 ] })
         } catch(err) {
-            return recordError(err, 'discovery');
+            return recordError(err, 'discovering');
         }
-        if (!discoveryData || !discoveryData.keyToAccountMap) {
+        if (!discoveringData || !discoveringData.keyToAccountMap) {
             return recordError("No data", 'keyToAccountMap');
         }
         let accountInfo = null
-        if (discoveryData.keyToAccountMap.length > 0) {
-            return recordError('discovery seth test','test');
+        if (discoveringData.keyToAccountMap.length > 0) {
             dispatch({type:'switch', payload:'Discovery complete...'})
             // @todo(seth): should allow selection
             const index = 0;
-            const keyObj = discoveryData.keyToAccountMap[index];
-            console.log('discovery, keyObj', keyObj)
+            const keyObj = discoveringData.keyToAccountMap[index];
+            console.log('discovering, keyObj', keyObj)
             const accountName = keyObj.accounts[0].account;
             const authorization = keyObj.accounts[0].authorization;
             try { 
                 accountInfo = await wallet.login(accountName, authorization)
             } catch(err) {
-                return recordError(err, 'login_with_discovery');
+                return recordError(err, 'logging in after discovering');
             }
         } 
-        else { // discovery not supported (scatter for example)
+        else { // discovering not supported (scatter for example)
             dispatch({type:'switch', payload:'Logging in...'})
             try { 
                 accountInfo = await wallet.login()
             } catch(err) {
-                return recordError(err, 'login');
+                return recordError(err, 'logging in');
             }
         }
         // logged in
         if (!accountInfo) {
-            return recordError("Not logged in", 'account_info_check')
+            return recordError("Not logged in", 'verifying account info entered')
         }
         let username = wallet.auth.accountName
 
@@ -128,9 +127,11 @@ const Apply = (props) => {
             }, {
                 broadcast: true,
                 blocksBehind: 3, expireSeconds: 100});
-            return recordError('test','test');
         } catch(err) {
-            return recordError(err, 'eos api transact');
+            return recordError("Make sure you press confirm", 'submitting');
+            // they can't handle the real error
+            // TypeError: undefined is not iteratble
+            //return recordError(err, 'eos api transact');
         }
         dispatch({type:'switch', payload:'done'})
     };
